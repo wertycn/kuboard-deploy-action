@@ -1,0 +1,53 @@
+name: 'kuboard deploy action '
+description: 'k8s dashboard kuboard ci/cd auto deploy action'
+branding:
+  icon: 'send'  
+  color: 'green'
+inputs:
+  user:
+    description:
+      'kuboard user name'
+    required: true
+    default: ''
+  access_key:
+    description:
+      'kuboard access key'
+    required: true
+    default: ''
+  deploy_kind:
+    description:
+      'deploy pod kind (deployments,statefulsets,daemonsets,cronjobs,jobs)'
+    required: false
+    default: 'deployments'
+  deploy_namespace:
+    description:
+      'deploy cluster namespace'
+    required: true
+    default: ''
+  server_name:
+    description:
+      'deploy server name'
+    required: true
+    default: ''
+  docker_image:
+    description:
+      'deploy server docker image'
+    required: true
+    default: ''
+  deploy_api_url:
+    description:
+      'kuboard deploy (ci/cd) api url,eg http://YOUR_DOMAIN/kuboard-api/cluster/YOUR_CLUSTER_NAME/kind/CICDApi/YOUR_KUBOARD_NAME/resource/updateImageTag'
+    required: true
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.user }}
+    - ${{ inputs.access_key }}
+    - ${{ inputs.deploy_kind }}
+    - ${{ inputs.deploy_namespace }}
+    - ${{ inputs.server_name }}
+    - ${{ inputs.docker_image }}
+    - ${{ inputs.deploy_api_url }}
+  entrypoint: '/opt/entrypoint.sh'
