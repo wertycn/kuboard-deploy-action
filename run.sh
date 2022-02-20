@@ -36,7 +36,7 @@ echo "curl -sS -X PUT \
 
 echo $PARAM_CONTENT > .__deploy_param.json
 cat .__deploy_param.json
-HTTP_CODE=$(curl -sS -v -X PUT \
+HTTP_CODE=$(curl -sS  -X PUT \
     -w %{http_code} \
     -o ".__deploy_response.json" \
     -H "content-type: application/json" \
