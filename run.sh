@@ -50,8 +50,6 @@ rm -rf .__deploy_response.json
 if [ $HTTP_CODE -ge 200 ] && [ $HTTP_CODE -lt 400 ]; then
   echo "::notice:: request deploy api response http_code is ${HTTP_CODE}"
   echo "::notice:: kuboard deploy request success!"
-  echo $RESPONSE_CONTENT | jq .
-
   exit 0
 fi
 
